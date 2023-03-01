@@ -4,13 +4,14 @@ from random import randint
 from time import sleep
 
 
-def worker(semaphore: Semaphore, r: dict):
-    print('Wait')
+def worker(semaphore: Semaphore, r: list):
+    name = current_process().name
+    print(f'{name} wait...')
     with semaphore:
-        name = current_process().name
         print(f'Work {name}')
-        delay = randint(1, 2)
-        r[name] = delay
+        delay = randint(1, 100)
+        r.append({name: delay})
+        # r[name] = delay
         sleep(0.2)  # Імітуємо якусь роботу
         sys.exit(0)
 
@@ -18,7 +19,9 @@ def worker(semaphore: Semaphore, r: dict):
 if __name__ == '__main__':
     semaphore = Semaphore(3)
     with Manager() as m:
-        result = m.dict()
+        # result = m.dict()
+        result = m.list()
+        print(result)
         prs = []
         for num in range(10):
             pr = Process(name=f'Process-{num}', target=worker, args=(semaphore, result))

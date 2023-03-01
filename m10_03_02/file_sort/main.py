@@ -18,11 +18,25 @@ output_folder = Path(output)  # dist
 
 
 def read_folder(path: Path) -> None:
-    pass
+    print(f"Start {current_process().name} in {path}")
+    for el in path.iterdir():
+        if el.is_dir():
+            inner_process = Process(target=read_folder, args=(el,))
+            inner_process.start()
+        else:
+            copy_file(el)
+
+    print(f"Finish {current_process().name} in {path}")
 
 
 def copy_file(file: Path) -> None:
-    pass
+    ext = file.suffix[1:]
+    new_path = output_folder / ext
+    try:
+        new_path.mkdir(exist_ok=True, parents=True)
+        copyfile(file, new_path / file.name)
+    except OSError as error:
+        print(error)
 
 
 if __name__ == "__main__":

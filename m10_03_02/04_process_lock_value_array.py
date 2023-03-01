@@ -1,5 +1,5 @@
 from multiprocessing import Process, current_process, RLock, Value, Array
-from ctypes import c_int, c_double, Structure
+from ctypes import c_int, c_double, Structure, c_char
 from sys import exit
 
 
@@ -25,7 +25,7 @@ if __name__ == '__main__':
     print('Start program')
 
     value = Value(c_double, 1.5, lock=RLock())
-    string = Array('c', b'The best group 10', lock=RLock())
+    string = Array('c', b'The best of the best group 10', lock=RLock())
     arr = Array(Point, [(0, 0), (2, 0), (2, 2)], lock=RLock())
 
     process = []

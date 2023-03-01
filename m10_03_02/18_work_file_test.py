@@ -1,5 +1,5 @@
 from multiprocessing import Process, RLock as PRLock
-from multiprocessing.dummy import Pool  # Thread с оболочкой Process
+from multiprocessing.dummy import Pool, RLock as DummyLock  # Thread с оболочкой Process
 from threading import Thread, RLock as TRlock
 from time import time
 
@@ -45,9 +45,10 @@ if __name__ == '__main__':
 
     pl_filename = 'pl_squares.txt'
     timer = time()
+    dummy_lock = DummyLock()
     with Pool(3) as pool:
         result = pool.starmap(worker,
-                              [(values[:200000], pl_filename, th_lock),
-                               (values[200000:400000], pl_filename, th_lock),
-                               (values[400000:], pl_filename, th_lock)])
+                              [(values[:200000], pl_filename, dummy_lock),
+                               (values[200000:400000], pl_filename, dummy_lock),
+                               (values[400000:], pl_filename, dummy_lock)])
     print(f'Done by 3 pool processes dummy: {round(time() - timer, 4)}')

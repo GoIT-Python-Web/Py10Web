@@ -23,7 +23,7 @@ def wk(sender: Pipe, store):
 
 
 def main():
-    start_pipe, end_pipe = Pipe()
+    start_pipe, end_pipe = Pipe(duplex=True)
     foo = Foo(100)
     store = [12, 'Hello world', {'year': 2022}, foo, foo.value, 42, None, 43]
     my_worker = Process(target=worker, args=(end_pipe, ))

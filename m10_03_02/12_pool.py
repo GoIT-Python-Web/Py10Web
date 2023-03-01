@@ -13,14 +13,16 @@ def worker():
 
 
 def callback(result):
-    print(result)
+    print(result.upper())
 
 
 if __name__ == "__main__":
     print(f"Count CPU: {cpu_count()}")
     with Pool(cpu_count()) as pool:
-        pool.apply_async(worker, callback=callback)
-        pool.apply_async(worker, callback=callback)
+        for i in range(cpu_count()):
+            print(i)
+            pool.apply_async(worker, callback=callback)
+        # pool.apply_async(worker, callback=callback)
         pool.close()  # перестати виділяти процеси в пулл
         # p.terminate()  # убить всех
         pool.join()  # дочекатися закінчення всіх процесів

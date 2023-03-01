@@ -11,13 +11,13 @@ def worker(values, filename):
 
 
 if __name__ == '__main__':
-    values = list(range(600000))
+    values = list(range(600_000))
 
     th_filename = 'th_squares.txt'
     threads = [
-        Thread(target=worker, args=(values[:200000], th_filename)),
-        Thread(target=worker, args=(values[200000:400000], th_filename)),
-        Thread(target=worker, args=(values[400000:], th_filename)),
+        Thread(target=worker, args=(values[:200_000], th_filename)),
+        Thread(target=worker, args=(values[200_000:400_000], th_filename)),
+        Thread(target=worker, args=(values[400_000:], th_filename)),
     ]
     timer = time()
     [thread.start() for thread in threads]
@@ -26,9 +26,9 @@ if __name__ == '__main__':
 
     pr_filename = 'pr_squares.txt'
     processes = [
-        Process(target=worker, args=(values[:200000], pr_filename)),
-        Process(target=worker, args=(values[200000:400000], pr_filename)),
-        Process(target=worker, args=(values[400000:], pr_filename)),
+        Process(target=worker, args=(values[:200_000], pr_filename)),
+        Process(target=worker, args=(values[200_000:400_000], pr_filename)),
+        Process(target=worker, args=(values[400_000:], pr_filename)),
     ]
 
     timer = time()
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     pl_filename = 'pl_squares.txt'
     timer = time()
     with Pool(3) as pool:
-        result = pool.starmap(worker, [(values[:200000], pl_filename),
-                                       (values[200000:400000], pl_filename),
-                                       (values[400000:], pl_filename)])
+        result = pool.starmap(worker, [(values[:200_000], pl_filename),
+                                       (values[200_000:400_000], pl_filename),
+                                       (values[400_000:], pl_filename)])
     print(f'Done by 3 pool processes dummy: {round(time() - timer, 4)}')

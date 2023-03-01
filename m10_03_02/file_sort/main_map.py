@@ -18,17 +18,33 @@ output_folder = Path(output)  # dist
 
 
 def read_folder(path: Path) -> list:
-    pass
+    list_folders = []
+    for el in path.iterdir():
+        if el.is_dir():
+            list_folders.append(el)
+            r = read_folder(el)
+            if len(r):
+                list_folders = list_folders + r
+
+    return list_folders
 
 
 def copy_file(dir: Path) -> None:
-    pass
+    for el in dir.iterdir():
+        if el.is_file():
+            ext = el.suffix[1:]
+            new_path = output_folder / ext
+            try:
+                new_path.mkdir(exist_ok=True, parents=True)
+                copyfile(el, new_path / el.name)
+            except OSError as error:
+                print(error)
 
 
 if __name__ == "__main__":
+    print(read_folder(Path(source)))
     with Pool(cpu_count()) as pool:
         pool.map(copy_file, read_folder(Path(source)))
         pool.close()
         pool.join()
-
     print("Finished")
