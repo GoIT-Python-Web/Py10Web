@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "m10-hw-07"
+version = "0.1.0"
+description = ""
+authors = ["Yuriy Kuchma <krabatua@gmail.com>"]
+readme = "README.md"
+packages = [{include = "m10_hw_07"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sqlalchemy = "^2.0.7"
+alembic = "^1.10.2"
+faker = "^18.3.1"
+psycopg2 = "^2.9.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

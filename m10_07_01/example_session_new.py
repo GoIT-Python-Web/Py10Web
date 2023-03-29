@@ -5,7 +5,7 @@ Session
 from sqlalchemy import Column, Integer, String, ForeignKey, create_engine, select
 from sqlalchemy.orm import relationship, declarative_base, sessionmaker
 
-engine = create_engine('sqlite:///:memory:', echo=True)
+engine = create_engine('sqlite:///:memory:', echo=False)
 DBSession = sessionmaker(bind=engine)
 
 Base = declarative_base()
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     igor = User(fullname='Igor Omelchenko')
     session.add(igor)
     # session.commit()
-    print(denis.id)
+    # print(denis.id)
     denis_address = Address(email='denisua@gmail.com', user=denis)
     session.add(denis_address)
     session.commit()
@@ -47,5 +47,10 @@ if __name__ == '__main__':
 
     for a in adr:
         print(a.id, a.email, a.user.fullname)
+
+    column_names = ["id", "fullname"]
+    u = session.execute(select(User)).scalars().all()
+    db = [dict(zip(column_names, (row.id, row.fullname))) for row in u]
+    print(db)
 
     session.close()

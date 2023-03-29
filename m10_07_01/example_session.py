@@ -43,6 +43,10 @@ if __name__ == '__main__':
     for u in users:
         print(u.id, u.fullname)
 
+    column_names = ["id", "fullname"]
+    db = [dict(zip(column_names, (row.id, row.fullname))) for row in users]
+    print(db)
+
     adr = session.query(Address).join(Address.user).all()
 
     for a in adr:
