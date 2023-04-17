@@ -1,0 +1,13 @@
+{% extends "app_instagram/base.html" %}
+
+{% block main %}
+<form action="{% url 'app_instagram:edit' pic.id %}" method="post">
+  {% csrf_token %}
+  <img src="{{pic.path.url}}" width=320 alt="">
+  <div class="mb-3">
+    <label>Description</label>
+    <input type="text" class="form-control" value="{{pic.description}}" name="description">
+  </div>
+  <button type="submit" class="btn btn-primary">Edit</button>
+</form>
+{% endblock %}

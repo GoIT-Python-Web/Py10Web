@@ -1,0 +1,20 @@
+{% extends "app_instagram/base.html" %}
+
+{% block main %}
+<h3>Upload file</h3>
+<form action="{% url 'app_instagram:upload' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row mb-3">
+        <label>Description</label>
+        {{form.description}}
+        {% if form.errors %}
+        <span class="alert alert-danger" role="alert">{{form.errors.description}}</span>
+        {% endif %}
+    </div>
+    <div class="row mb-3">
+        <label>Picture</label>
+        {{form.path}}
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+{% endblock %}
