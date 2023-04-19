@@ -20,4 +20,4 @@ def update_filename(instance, filename):
 class Picture(models.Model):
     description = models.CharField(max_length=200)
     path = models.ImageField(upload_to=update_filename)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=4)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True, blank=True)
