@@ -1,0 +1,45 @@
+{% extends "app_instagram/base.html" %}
+
+{% block main %}
+<h3>SignUp</h3>
+
+{% if form.errors %}
+<span class="alert alert-danger" role="alert">{{form.non_field_errors}}</span>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="row mb-3">
+        <label>Username</label>
+        {{form.username}}
+        <span>{{form.errors.username}}</span>
+    </div>
+    <div class="row mb-3">
+        <label>First name</label>
+        {{form.first_name}}
+        <span>{{form.errors.first_name}}</span>
+    </div>
+    <div class="row mb-3">
+        <label>Last name</label>
+        {{form.last_name}}
+        <span>{{form.errors.last_name}}</span>
+    </div>
+    <div class="row mb-3">
+        <label>Email</label>
+        {{form.email}}
+        <span>{{form.errors.email}}</span>
+    </div>
+    <div class="row mb-3">
+        <label>Password:</label>
+        {{form.password1}}
+        <span>{{form.errors.password1}}</span>
+    </div>
+    <div class="row mb-3">
+        <label>Repeat password</label>
+        {{form.password2}}
+        <span>{{form.errors.password2}}</span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-info">Reset</button>
+</form>
+{% endblock %}
