@@ -12,7 +12,7 @@ const getOwners = async () => {
   }
 
   const response = await fetch(
-    'http://127.0.0.1:8000/api/owners',
+    'http://127.0.0.1:3000/api/owners',
     requestOptions,
   )
 

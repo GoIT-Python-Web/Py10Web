@@ -21,7 +21,7 @@ form.addEventListener('submit', async (e) => {
   }
 
   const response = await fetch(
-    'http://127.0.0.1:8000/api/auth/login',
+    'http://127.0.0.1:3000/api/auth/login',
     requestOptions,
   )
   if (response.status == 200) {
