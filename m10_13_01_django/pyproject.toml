@@ -4,13 +4,14 @@ version = "0.1.0"
 description = ""
 authors = ["Yuriy Kuchma <krabatua@gmail.com>"]
 readme = "README.md"
-packages = [{include = "m10_10_01"}]
+#packages = [{include = "m10_10_01"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 django = "^4.2"
 psycopg2 = "^2.9.6"
 pillow = "^9.5.0"
+django-environ = "^0.10.0"
 
 
 [build-system]
